@@ -9,7 +9,16 @@ export const carSlice = createSlice({
   initialState: carState,
   reducers: {
     resetData: () => JSON.parse(carStateDefault),
-    loadData: (state, action: PayloadAction<{carEntries: Car[]}>) => ({...state, carEntries: action.payload.carEntries})
+    loadData: (state, action: PayloadAction<{carEntries: Car[]}>) => {
+      Object.assign(state.carEntries, action.payload.carEntries)
+    },
+    setSelectedBrand(state, action: PayloadAction<string>){
+      state.newCar.brand = action.payload
+    },
+    setSelectedModel(state, action: PayloadAction<string>) {
+      state.newCar.model = action.payload
+    },
+
   },
 })
 

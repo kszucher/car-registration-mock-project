@@ -1,20 +1,14 @@
-import {
-  Button,
-  Dialog,
-  Flex,
-  TextField,
-  Text,
-  Table,
-  TableBody,
-  Popover,
-  Select,
-  Grid,
-} from '@radix-ui/themes'
+import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid,} from '@radix-ui/themes'
 import './App.css'
 import '@radix-ui/themes/styles.css'
 import {Pencil1Icon, ResetIcon} from "@radix-ui/react-icons"
+import {mockCarDefinitions} from "./mock/MockCarDefinitions.ts"
+import {useDispatch, useSelector} from "react-redux"
+import {actions, AppDispatch, RootState} from "./reducers/CarReducer.ts"
 
 function App() {
+  const newCar = useSelector((state: RootState) => state.newCar)
+  const dispatch = useDispatch<AppDispatch>()
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: 400, height: 300}}>
       <Dialog.Root>
@@ -65,19 +59,21 @@ function App() {
               <Popover.Content style={{ width: 360 }}>
                 <Grid columns="2" gap="3" width="auto" align="center">
                   <Text as="div" size="2" weight="bold" style={{}}>{'Brand'}</Text>
-                  <Select.Root defaultValue="apple">
+                  <Select.Root defaultValue={newCar.brand} onValueChange={(value) => dispatch(actions.setSelectedBrand(value))}>
                     <Select.Trigger />
                     <Select.Content>
-                      <Select.Item value="orange">Orange</Select.Item>
-                      <Select.Item value="apple">Apple</Select.Item>
+                      {Object.keys(mockCarDefinitions.brands).map((el, index) => (
+                        <Select.Item key={index} value={el}>{el}</Select.Item>
+                      ))}
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Model'}</Text>
-                  <Select.Root defaultValue="apple">
+                  <Select.Root defaultValue={newCar.model}>
                     <Select.Trigger />
                     <Select.Content>
-                      <Select.Item value="orange">Orange</Select.Item>
-                      <Select.Item value="apple">Apple</Select.Item>
+                      {Object.keys(mockCarDefinitions.brands[newCar.brand].models).map((el, index) => (
+                        <Select.Item key={index} value={el}>{el}</Select.Item>
+                      ))}
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Engine Capacity'}</Text>
@@ -117,7 +113,7 @@ function App() {
                     </Button>
                   </Popover.Close>
                   <Popover.Close>
-                    <Button>Save</Button>
+                    <Button variant="soft">Save</Button>
                   </Popover.Close>
                 </Flex>
               </Popover.Content>

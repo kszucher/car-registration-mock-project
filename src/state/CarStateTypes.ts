@@ -9,5 +9,6 @@ export type Car = {
 }
 
 export interface CarState {
-  carEntries: Car[]
+  carEntries: Car[],
+  newCar: Car
 }
