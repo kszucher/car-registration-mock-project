@@ -8,6 +8,11 @@ import {actions, AppDispatch, RootState} from "./reducers/CarReducer.ts"
 
 function App() {
   const newCar = useSelector((state: RootState) => state.newCar)
+  const newCarBrand = useSelector((state: RootState) => state.newCar.brand)
+  const newCarModel = useSelector((state: RootState) => state.newCar.model)
+  const newCarEngineCapacity = useSelector((state: RootState) => state.newCar.engineCapacity)
+  const newCarColor = useSelector((state: RootState) => state.newCar.color)
+  const newCarEngineConfiguration = useSelector((state: RootState) => state.newCar.configuration)
   const dispatch = useDispatch<AppDispatch>()
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: 400, height: 300}}>
@@ -59,7 +64,7 @@ function App() {
               <Popover.Content style={{ width: 360 }}>
                 <Grid columns="2" gap="3" width="auto" align="center">
                   <Text as="div" size="2" weight="bold" style={{}}>{'Brand'}</Text>
-                  <Select.Root defaultValue={newCar.brand} onValueChange={(value) => dispatch(actions.setSelectedBrand(value))}>
+                  <Select.Root value={newCarBrand} onValueChange={(value) => dispatch(actions.setSelectedBrand(value))}>
                     <Select.Trigger />
                     <Select.Content>
                       {Object.keys(mockCarDefinitions.brands).map((el, index) => (
@@ -68,36 +73,39 @@ function App() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Model'}</Text>
-                  <Select.Root defaultValue={newCar.model}>
+                  <Select.Root value={newCarModel} onValueChange={(value) => dispatch(actions.setSelectedModel(value))}>
                     <Select.Trigger />
                     <Select.Content>
-                      {Object.keys(mockCarDefinitions.brands[newCar.brand].models).map((el, index) => (
+                      {Object.keys(mockCarDefinitions.brands[newCarBrand].models).map((el, index) => (
                         <Select.Item key={index} value={el}>{el}</Select.Item>
                       ))}
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Engine Capacity'}</Text>
-                  <Select.Root defaultValue="apple">
+                  <Select.Root value={newCarEngineCapacity.toString()} onValueChange={(value) => dispatch(actions.setSelectedEngineCapacity(parseInt(value)))}>
                     <Select.Trigger />
                     <Select.Content>
-                      <Select.Item value="orange">Orange</Select.Item>
-                      <Select.Item value="apple">Apple</Select.Item>
+                      {mockCarDefinitions.brands[newCarBrand].models[newCarModel].engineCapacities.map((el, index) => (
+                        <Select.Item key={index} value={el.toString()}>{el}</Select.Item>
+                      ))}
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Color'}</Text>
-                  <Select.Root defaultValue="apple">
+                  <Select.Root value={newCarColor} onValueChange={(value) => dispatch(actions.setSelectedColor(value))}>
                     <Select.Trigger />
                     <Select.Content>
-                      <Select.Item value="orange">Orange</Select.Item>
-                      <Select.Item value="apple">Apple</Select.Item>
+                      {mockCarDefinitions.brands[newCarBrand].models[newCarModel].colors.map((el, index) => (
+                        <Select.Item key={index} value={el.toString()}>{el}</Select.Item>
+                      ))}
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Configuration'}</Text>
-                  <Select.Root defaultValue="apple">
+                  <Select.Root value={newCarEngineConfiguration} onValueChange={(value) => dispatch(actions.setSelectedConfiguration(value))}>
                     <Select.Trigger />
                     <Select.Content>
-                      <Select.Item value="orange">Orange</Select.Item>
-                      <Select.Item value="apple">Apple</Select.Item>
+                      {mockCarDefinitions.brands[newCarBrand].models[newCarModel].configurations.map((el, index) => (
+                        <Select.Item key={index} value={el.toString()}>{el}</Select.Item>
+                      ))}
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Manufacturing Date'}</Text>
@@ -105,7 +113,6 @@ function App() {
                   <Text as="div" size="2" weight="bold">{'Manufacturer Website'}</Text>
                   <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email"/>
                 </Grid>
-
                 <Flex gap="3" mt="4" justify="end">
                   <Popover.Close>
                     <Button variant="soft" color="gray">
@@ -113,7 +120,9 @@ function App() {
                     </Button>
                   </Popover.Close>
                   <Popover.Close>
-                    <Button variant="soft">Save</Button>
+                    <Button variant="soft" onClick={() => console.log(newCar)}>
+                      {'Save'}
+                    </Button>
                   </Popover.Close>
                 </Flex>
               </Popover.Content>
@@ -124,7 +133,7 @@ function App() {
             </Button>
             <Dialog.Close>
               <Button variant="soft" color="gray">
-                Close
+                {'Close'}
               </Button>
             </Dialog.Close>
           </Flex>

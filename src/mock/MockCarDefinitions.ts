@@ -42,17 +42,17 @@ export const mockCarDefinitions: CarDefinitions = {
     BMW: {
       models: {
         ['3 Series']: {
-          colors: ['Silver', 'Gray'],
+          colors: ['Blue', 'Black'],
           engineCapacities: [1796, 1998],
           configurations: ['Sedan', 'Hatchback']
         },
         ['X5']: {
-          colors: ['Silver', 'Gray'],
+          colors: ['Pink', 'Purple'],
           engineCapacities: [2979],
           configurations: ['SUV']
         },
         ['M2']: {
-          colors: ['Silver', 'Gray'],
+          colors: ['Amber', 'Red', 'Orange'],
           engineCapacities: [2979, 2993],
           configurations: ['Coupe']
         }
@@ -71,7 +71,7 @@ export const mockCarDefinitions: CarDefinitions = {
           configurations: ['SUV']
         },
         ['RX-8']: {
-          colors: ['Silver', 'Red'],
+          colors: ['Teal', 'Yellow'],
           engineCapacities: [1308],
           configurations: ['Coupe', 'Cabrio'],
         }
