@@ -1,4 +1,15 @@
-import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid} from '@radix-ui/themes'
+import {
+  Button,
+  Dialog,
+  Flex,
+  TextField,
+  Text,
+  Table,
+  TableBody,
+  Popover,
+  Select,
+  Grid,
+} from '@radix-ui/themes'
 import './App.css'
 import '@radix-ui/themes/styles.css'
 import {Pencil1Icon, ResetIcon} from "@radix-ui/react-icons"
@@ -52,8 +63,8 @@ function App() {
                 </Button>
               </Popover.Trigger>
               <Popover.Content style={{ width: 360 }}>
-                <Grid columns="2" gap="3" width="auto">
-                  <Text as="div" size="2" mb="1" weight="bold">{'Brand'}</Text>
+                <Grid columns="2" gap="3" width="auto" align="center">
+                  <Text as="div" size="2" weight="bold" style={{}}>{'Brand'}</Text>
                   <Select.Root defaultValue="apple">
                     <Select.Trigger />
                     <Select.Content>
@@ -61,7 +72,7 @@ function App() {
                       <Select.Item value="apple">Apple</Select.Item>
                     </Select.Content>
                   </Select.Root>
-                  <Text as="div" size="2" mb="1" weight="bold">{'Model'}</Text>
+                  <Text as="div" size="2" weight="bold">{'Model'}</Text>
                   <Select.Root defaultValue="apple">
                     <Select.Trigger />
                     <Select.Content>
@@ -69,7 +80,33 @@ function App() {
                       <Select.Item value="apple">Apple</Select.Item>
                     </Select.Content>
                   </Select.Root>
-                  <Text as="div" size="2" mb="1" weight="bold">{'Model'}</Text>
+                  <Text as="div" size="2" weight="bold">{'Engine Capacity'}</Text>
+                  <Select.Root defaultValue="apple">
+                    <Select.Trigger />
+                    <Select.Content>
+                      <Select.Item value="orange">Orange</Select.Item>
+                      <Select.Item value="apple">Apple</Select.Item>
+                    </Select.Content>
+                  </Select.Root>
+                  <Text as="div" size="2" weight="bold">{'Color'}</Text>
+                  <Select.Root defaultValue="apple">
+                    <Select.Trigger />
+                    <Select.Content>
+                      <Select.Item value="orange">Orange</Select.Item>
+                      <Select.Item value="apple">Apple</Select.Item>
+                    </Select.Content>
+                  </Select.Root>
+                  <Text as="div" size="2" weight="bold">{'Configuration'}</Text>
+                  <Select.Root defaultValue="apple">
+                    <Select.Trigger />
+                    <Select.Content>
+                      <Select.Item value="orange">Orange</Select.Item>
+                      <Select.Item value="apple">Apple</Select.Item>
+                    </Select.Content>
+                  </Select.Root>
+                  <Text as="div" size="2" weight="bold">{'Manufacturing Date'}</Text>
+                  <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email"/>
+                  <Text as="div" size="2" weight="bold">{'Manufacturer Website'}</Text>
                   <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email"/>
                 </Grid>
 
