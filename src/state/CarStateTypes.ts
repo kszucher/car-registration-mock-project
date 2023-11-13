@@ -1,12 +1,13 @@
-import {carDefinitions} from "./Consts.ts"
-
-type Car = {
-  [Brand in keyof typeof carDefinitions]: {
-    carBrand: Brand;
-    carModel: typeof carDefinitions[Brand][number]
-  }
-}[keyof typeof carDefinitions]
+export type Car = {
+  brand: string
+  model: string
+  engineCapacity: number
+  color?: string
+  configuration?: string
+  manufacturingDate: Date
+  manufacturerWebsite?: URL
+}
 
 export interface CarState {
-  registeredCars: Car[]
+  carEntries: Car[]
 }

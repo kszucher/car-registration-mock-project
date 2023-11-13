@@ -1,7 +1,6 @@
 import {CarState} from "./CarStateTypes.ts"
+import {mockCarEntries} from "../mock/MockCarEntries.ts"
 
 export const carState: CarState = {
-  registeredCars: [
-    {carBrand: 'Mazda', carModel: 'Mazda3'}
-  ]
+  carEntries: mockCarEntries
 }
