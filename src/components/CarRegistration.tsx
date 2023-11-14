@@ -63,7 +63,7 @@ function CarRegistration() {
               <UploadIcon width="16" height="16" />
               {'Load Sample Data'}
             </Button>
-            <Button variant="soft" color="cyan">
+            <Button variant="soft" color="cyan" onClick={() => dispatch(actions.deleteData())} disabled={carEntries.length === 0}>
               <TrashIcon width="16" height="16" />
               {'Delete Data'}
             </Button>

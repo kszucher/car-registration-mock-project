@@ -13,6 +13,9 @@ export const carSlice = createSlice({
     loadSampleData: (state) => {
       Object.assign(state.carEntries, mockCarEntries)
     },
+    deleteData: (state) => {
+      state.carEntries = []
+    },
     setSelectedBrand(state, action: PayloadAction<string>){
       const brand = action.payload
       const model = Object.keys(mockCarDefinitions.brands[brand].models)[0]
