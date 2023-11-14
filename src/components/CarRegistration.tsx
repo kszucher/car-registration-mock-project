@@ -1,18 +1,20 @@
-import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid,} from '@radix-ui/themes'
+import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid, Link,} from '@radix-ui/themes'
 import './CarRegistration.css'
 import '@radix-ui/themes/styles.css'
-import {Pencil1Icon, ResetIcon} from "@radix-ui/react-icons"
+import {Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
 
 function CarRegistration() {
+  const carEntries = useSelector((state: RootState) => state.carEntries)
   const newCar = useSelector((state: RootState) => state.newCar)
   const newCarBrand = useSelector((state: RootState) => state.newCar.brand)
   const newCarModel = useSelector((state: RootState) => state.newCar.model)
   const newCarEngineCapacity = useSelector((state: RootState) => state.newCar.engineCapacity)
   const newCarColor = useSelector((state: RootState) => state.newCar.color)
   const newCarEngineConfiguration = useSelector((state: RootState) => state.newCar.configuration)
+  console.log(carEntries)
   const dispatch = useDispatch<AppDispatch>()
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: 400, height: 300}}>
@@ -40,25 +42,36 @@ function CarRegistration() {
               </Table.Row>
             </Table.Header>
             <TableBody>
-              <Table.Row>
-                <Table.RowHeaderCell>Danilo Sousa</Table.RowHeaderCell>
-                <Table.Cell>danilo@example.com</Table.Cell>
-                <Table.Cell>Developer</Table.Cell>
-              </Table.Row>
-
-              <Table.Row>
-                <Table.RowHeaderCell>Zahra Ambessa</Table.RowHeaderCell>
-                <Table.Cell>zahra@example.com</Table.Cell>
-                <Table.Cell>Admin</Table.Cell>
-              </Table.Row>
+              {carEntries.map((el, index) => (
+                <Table.Row key={index}>
+                  <Table.RowHeaderCell>{el.brand}</Table.RowHeaderCell>
+                  <Table.Cell>{el.model}</Table.Cell>
+                  <Table.Cell>{el.engineCapacity}</Table.Cell>
+                  <Table.Cell>{el.color}</Table.Cell>
+                  <Table.Cell>{el.configuration}</Table.Cell>
+                  <Table.Cell>{el.manufacturingDate.toString()}</Table.Cell>
+                  <Table.Cell>
+                    <Link onClick={() => window.open(el.manufacturerWebsite?.toString())}>{el.manufacturerWebsite?.toString() || ''}
+                    </Link>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
             </TableBody>
           </Table.Root>
           <Flex gap="3" mt="4" justify="end">
+            <Button variant="soft" color="cyan" onClick={() => dispatch(actions.loadSampleData())}>
+              <UploadIcon width="16" height="16" />
+              {'Load Sample Data'}
+            </Button>
+            <Button variant="soft" color="cyan">
+              <TrashIcon width="16" height="16" />
+              {'Delete Data'}
+            </Button>
             <Popover.Root>
               <Popover.Trigger>
                 <Button variant="soft">
                   <Pencil1Icon width="16" height="16" />
-                  Add New
+                  {'Add New Entry'}
                 </Button>
               </Popover.Trigger>
               <Popover.Content style={{ width: 360 }}>

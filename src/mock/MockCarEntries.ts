@@ -7,7 +7,7 @@ export const mockCarEntries = [
     engineCapacity: 4000,
     color: 'Gray',
     configuration: 'Sedan',
-    manufacturerWebsite: new URL('mazda.com'),
+    manufacturerWebsite: new URL('https://www.mazda.com/'),
     manufacturingDate: new Date('2015.01.01')
   },
   {

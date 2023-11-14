@@ -1,7 +1,7 @@
 import {configureStore, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {carState} from "../state/CarState.ts"
-import {Car} from "../state/CarStateTypes.ts"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
+import {mockCarEntries} from "../mock/MockCarEntries.ts";
 
 const carStateDefault = JSON.stringify(carState)
 
@@ -10,8 +10,8 @@ export const carSlice = createSlice({
   initialState: carState,
   reducers: {
     resetData: () => JSON.parse(carStateDefault),
-    loadData: (state, action: PayloadAction<{carEntries: Car[]}>) => {
-      Object.assign(state.carEntries, action.payload.carEntries)
+    loadSampleData: (state) => {
+      Object.assign(state.carEntries, mockCarEntries)
     },
     setSelectedBrand(state, action: PayloadAction<string>){
       const brand = action.payload
