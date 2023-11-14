@@ -1,7 +1,7 @@
 import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid, Link,} from '@radix-ui/themes'
 import './CarRegistration.css'
 import '@radix-ui/themes/styles.css'
-import {Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
+import {ExclamationTriangleIcon, Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
@@ -123,9 +123,19 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Manufacturing Date'}</Text>
-                  <TextField.Input defaultValue="" placeholder="YYYY-MM-DD"/>
+                  <TextField.Root>
+                    <TextField.Input defaultValue="" placeholder="YYYY-MM-DD"/>
+                    <TextField.Slot>
+                      <ExclamationTriangleIcon height="14" width="14"/>
+                    </TextField.Slot>
+                  </TextField.Root>
                   <Text as="div" size="2" weight="bold">{'Manufacturer Website'}</Text>
-                  <TextField.Input defaultValue="" placeholder="https://www.example.com/"/>
+                  <TextField.Root>
+                    <TextField.Input defaultValue="" placeholder="https://www.car.com/"/>
+                    <TextField.Slot>
+                      <ExclamationTriangleIcon height="14" width="14"/>
+                    </TextField.Slot>
+                  </TextField.Root>
                 </Grid>
                 <Flex gap="3" mt="4" justify="end">
                   <Button variant="soft" color="cyan">
