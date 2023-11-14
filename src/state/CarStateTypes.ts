@@ -15,7 +15,7 @@ export type ValidatedCar = {
   color?: string
   configuration?: string
   manufacturingDate: Date
-  manufacturerWebsite?: URL
+  manufacturerWebsite?: URL | string
 }
 
 export interface CarState {

@@ -173,7 +173,7 @@ function CarRegistration() {
                         color: newCarColor || '',
                         configuration: newCarConfiguration || '',
                         manufacturingDate: ymdToEpoch(newCarManufacturingDate),
-                        manufacturerWebsite: newCarManufacturerWebsite || new URL('https://example.com/')
+                        manufacturerWebsite: newCarManufacturerWebsite || ''
                       } as ValidatedCar))}>
                       {'Save'}
                     </Button>
