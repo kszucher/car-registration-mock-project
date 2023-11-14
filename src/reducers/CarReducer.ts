@@ -41,11 +41,11 @@ export const carSlice = createSlice({
     setSelectedConfiguration(state, action: PayloadAction<string>) {
       state.newCar.configuration = action.payload
     },
-    setSelectedManufacturingDate(state, action: PayloadAction<Date>) {
+    setSelectedManufacturingDate(state, action: PayloadAction<string>) {
       state.newCar.manufacturingDate = action.payload
     },
-    setSelectedManufacturerWebsite(state, action: PayloadAction<URL>) {
-      Object.assign(state.newCar, {manufacturerWebsite: action.payload})
+    setSelectedManufacturerWebsite(state, action: PayloadAction<string>) {
+      state.newCar.manufacturerWebsite = action.payload
     }
   },
 })

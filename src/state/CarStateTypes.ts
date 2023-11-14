@@ -1,4 +1,14 @@
-export type Car = {
+type Car = {
+  brand: string
+  model: string
+  engineCapacity: number
+  color?: string
+  configuration?: string
+  manufacturingDate: string
+  manufacturerWebsite?: string
+}
+
+export type ValidatedCar = {
   brand: string
   model: string
   engineCapacity: number
@@ -9,6 +19,6 @@ export type Car = {
 }
 
 export interface CarState {
-  carEntries: Car[],
+  carEntries: ValidatedCar[],
   newCar: Car
 }

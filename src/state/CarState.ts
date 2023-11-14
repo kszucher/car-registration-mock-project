@@ -15,7 +15,7 @@ export const carState: CarState = {
     engineCapacity: defaultEngineCapacity,
     color: defaultColor,
     configuration: defaultConfiguration,
-    manufacturingDate: new Date(),
-    manufacturerWebsite: new URL('https://www.cars.com/'),
+    manufacturingDate: '',
+    manufacturerWebsite: '',
   },
 }

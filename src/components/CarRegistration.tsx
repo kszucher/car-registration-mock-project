@@ -128,14 +128,20 @@ function CarRegistration() {
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Manufacturing Date'}</Text>
                   <TextField.Root>
-                    <TextField.Input defaultValue="" placeholder="YYYY-MM-DD"/>
+                    <TextField.Input
+                      placeholder="YYYY-MM-DD"
+                      value={newCarManufacturingDate}
+                      onChange={(e) => dispatch(actions.setSelectedManufacturingDate(e.target.value))}/>
                     <TextField.Slot>
                       <ExclamationTriangleIcon height="14" width="14"/>
                     </TextField.Slot>
                   </TextField.Root>
                   <Text as="div" size="2" weight="bold">{'Manufacturer Website'}</Text>
                   <TextField.Root>
-                    <TextField.Input defaultValue="" placeholder="https://www.car.com/"/>
+                    <TextField.Input
+                      placeholder='https://example.com/'
+                      value={newCarManufacturerWebsite}
+                      onChange={(e) => dispatch(actions.setSelectedManufacturerWebsite(e.target.value))}/>
                     <TextField.Slot>
                       <ExclamationTriangleIcon height="14" width="14"/>
                     </TextField.Slot>

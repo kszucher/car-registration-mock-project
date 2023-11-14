@@ -1,4 +1,4 @@
-import {Car} from "../state/CarStateTypes.ts"
+import {ValidatedCar} from "../state/CarStateTypes.ts"
 
 export const mockCarEntries = [
   {
@@ -23,4 +23,4 @@ export const mockCarEntries = [
     engineCapacity: 4000,
     manufacturingDate: new Date('2019.01.01')
   },
-] as Car[]
+] as ValidatedCar[]
