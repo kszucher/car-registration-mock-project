@@ -114,23 +114,23 @@ function CarRegistration() {
                   <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email"/>
                 </Grid>
                 <Flex gap="3" mt="4" justify="end">
-                  <Popover.Close>
-                    <Button variant="soft" color="gray">
-                      Cancel
-                    </Button>
-                  </Popover.Close>
+                  <Button variant="soft" color="cyan">
+                    <ResetIcon width="16" height="16" />
+                    Reset
+                  </Button>
                   <Popover.Close>
                     <Button variant="soft" onClick={() => console.log(newCar)}>
                       {'Save'}
                     </Button>
                   </Popover.Close>
+                  <Popover.Close>
+                    <Button variant="soft" color="gray">
+                      Cancel
+                    </Button>
+                  </Popover.Close>
                 </Flex>
               </Popover.Content>
             </Popover.Root>
-            <Button variant="soft" color="cyan">
-              <ResetIcon width="16" height="16" />
-              Reset
-            </Button>
             <Dialog.Close>
               <Button variant="soft" color="gray">
                 {'Close'}
