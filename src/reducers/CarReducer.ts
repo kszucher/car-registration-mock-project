@@ -2,6 +2,7 @@ import {configureStore, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {carState} from "../state/CarState.ts"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {mockCarEntries} from "../mock/MockCarEntries.ts"
+import {ValidatedCar} from "../state/CarStateTypes.ts"
 
 const carStateDefault = JSON.stringify(carState)
 
@@ -46,6 +47,9 @@ export const carSlice = createSlice({
     },
     setSelectedManufacturerWebsite(state, action: PayloadAction<string>) {
       state.newCar.manufacturerWebsite = action.payload
+    },
+    pushCar(state, action: PayloadAction<ValidatedCar>) {
+      Object.assign(state.carEntries, [...state.carEntries, action.payload])
     }
   },
 })

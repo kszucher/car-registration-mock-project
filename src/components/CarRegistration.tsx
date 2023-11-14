@@ -5,16 +5,17 @@ import {CheckIcon, ExclamationTriangleIcon, Pencil1Icon, ResetIcon, TrashIcon, U
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
-import {formatDate, isValidDate, isValidUrl} from "../utils/Utils.ts"
+import {epochToYMD, isValidDate, isValidUrl, ymdToEpoch} from "../utils/Utils.ts"
+import {ValidatedCar} from "../state/CarStateTypes.ts";
 
 function CarRegistration() {
   const carEntries = useSelector((state: RootState) => state.carEntries)
-  const newCar = useSelector((state: RootState) => state.newCar)
+  // const newCar = useSelector((state: RootState) => state.newCar)
   const newCarBrand = useSelector((state: RootState) => state.newCar.brand)
   const newCarModel = useSelector((state: RootState) => state.newCar.model)
   const newCarEngineCapacity = useSelector((state: RootState) => state.newCar.engineCapacity)
   const newCarColor = useSelector((state: RootState) => state.newCar.color)
-  const newCarEngineConfiguration = useSelector((state: RootState) => state.newCar.configuration)
+  const newCarConfiguration = useSelector((state: RootState) => state.newCar.configuration)
   const newCarManufacturingDate = useSelector((state: RootState) => state.newCar.manufacturingDate)
   const newCarManufacturerWebsite = useSelector((state: RootState) => state.newCar.manufacturerWebsite)
   const dispatch = useDispatch<AppDispatch>()
@@ -51,7 +52,7 @@ function CarRegistration() {
                   <Table.Cell>{el.engineCapacity}</Table.Cell>
                   <Table.Cell>{el.color}</Table.Cell>
                   <Table.Cell>{el.configuration}</Table.Cell>
-                  <Table.Cell>{formatDate(el.manufacturingDate)}</Table.Cell>
+                  <Table.Cell>{epochToYMD(el.manufacturingDate)}</Table.Cell>
                   <Table.Cell>
                     <Link onClick={() => window.open(el.manufacturerWebsite?.toString())}>{el.manufacturerWebsite?.toString()}
                     </Link>
@@ -115,7 +116,7 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Configuration'}</Text>
-                  <Select.Root value={newCarEngineConfiguration} onValueChange={(value) => dispatch(actions.setSelectedConfiguration(value))}>
+                  <Select.Root value={newCarConfiguration} onValueChange={(value) => dispatch(actions.setSelectedConfiguration(value))}>
                     <Select.Trigger />
                     <Select.Content>
                       {mockCarDefinitions.brands[newCarBrand].models[newCarModel].configurations.map((el, index) => (
@@ -165,7 +166,15 @@ function CarRegistration() {
                         newCarManufacturingDate.length > 0 && !isValidDate(newCarManufacturingDate) ||
                         newCarManufacturerWebsite !== undefined && newCarManufacturerWebsite.length > 0 && !isValidUrl(newCarManufacturerWebsite)
                       }
-                      onClick={() => console.log(newCar)}>
+                      onClick={() => dispatch(actions.pushCar({
+                        brand: newCarBrand,
+                        model: newCarModel,
+                        engineCapacity: newCarEngineCapacity,
+                        color: newCarColor || '',
+                        configuration: newCarConfiguration || '',
+                        manufacturingDate: ymdToEpoch(newCarManufacturingDate),
+                        manufacturerWebsite: newCarManufacturerWebsite || new URL('https://example.com/')
+                      } as ValidatedCar))}>
                       {'Save'}
                     </Button>
                   </Popover.Close>

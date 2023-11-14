@@ -1,8 +1,13 @@
-export const formatDate = (date: Date): string => {
-  const year = date.toLocaleString('default', {year: 'numeric'})
-  const month = date.toLocaleString('default', {month: '2-digit'})
-  const day = date.toLocaleString('default', {day: '2-digit'})
+export const epochToYMD = (dateStr: Date): string => {
+  const year = dateStr.toLocaleString('default', {year: 'numeric'})
+  const month = dateStr.toLocaleString('default', {month: '2-digit'})
+  const day = dateStr.toLocaleString('default', {day: '2-digit'})
   return [year, month, day].join('-')
+}
+
+export const ymdToEpoch = (dateStr: string): Date => {
+  const [year, month, day] = dateStr.split('-').map(part => parseInt(part))
+  return new Date(year, month - 1, day)
 }
 
 export const isValidDate = (dateString: string): boolean => {
