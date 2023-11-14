@@ -1,7 +1,7 @@
 import {configureStore, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {carState} from "../state/CarState.ts"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
-import {mockCarEntries} from "../mock/MockCarEntries.ts";
+import {mockCarEntries} from "../mock/MockCarEntries.ts"
 
 const carStateDefault = JSON.stringify(carState)
 
@@ -10,7 +10,7 @@ export const carSlice = createSlice({
   initialState: carState,
   reducers: {
     resetData: () => JSON.parse(carStateDefault),
-    loadSampleData: (state) => {
+    loadSampleData(state){
       Object.assign(state.carEntries, mockCarEntries)
     },
     deleteData: (state) => {
@@ -22,11 +22,7 @@ export const carSlice = createSlice({
       const engineCapacity = mockCarDefinitions.brands[brand].models[model].engineCapacities[0]
       const color = mockCarDefinitions.brands[brand].models[model].colors[0]
       const configuration = mockCarDefinitions.brands[brand].models[model].configurations[0]
-      state.newCar.brand = brand
-      state.newCar.model = model
-      state.newCar.engineCapacity = engineCapacity
-      state.newCar.color = color
-      state.newCar.configuration = configuration
+      Object.assign(state.newCar, {brand, model, engineCapacity, color, configuration})
     },
     setSelectedModel(state, action: PayloadAction<string>) {
       const brand = state.newCar.brand
@@ -34,10 +30,7 @@ export const carSlice = createSlice({
       const engineCapacity = mockCarDefinitions.brands[brand].models[model].engineCapacities[0]
       const color = mockCarDefinitions.brands[brand].models[model].colors[0]
       const configuration = mockCarDefinitions.brands[brand].models[model].configurations[0]
-      state.newCar.model = model
-      state.newCar.engineCapacity = engineCapacity
-      state.newCar.color = color
-      state.newCar.configuration = configuration
+      Object.assign(state.newCar, {model, engineCapacity, color, configuration})
     },
     setSelectedEngineCapacity(state, action: PayloadAction<number>) {
       state.newCar.engineCapacity = action.payload
@@ -47,6 +40,12 @@ export const carSlice = createSlice({
     },
     setSelectedConfiguration(state, action: PayloadAction<string>) {
       state.newCar.configuration = action.payload
+    },
+    setSelectedManufacturingDate(state, action: PayloadAction<Date>) {
+      state.newCar.manufacturingDate = action.payload
+    },
+    setSelectedManufacturerWebsite(state, action: PayloadAction<URL>) {
+      Object.assign(state.newCar, {manufacturerWebsite: action.payload})
     }
   },
 })

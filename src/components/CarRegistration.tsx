@@ -15,6 +15,10 @@ function CarRegistration() {
   const newCarEngineCapacity = useSelector((state: RootState) => state.newCar.engineCapacity)
   const newCarColor = useSelector((state: RootState) => state.newCar.color)
   const newCarEngineConfiguration = useSelector((state: RootState) => state.newCar.configuration)
+  const newCarManufacturingDate = useSelector((state: RootState) => state.newCar.manufacturingDate)
+  const newCarManufacturerWebsite = useSelector((state: RootState) => state.newCar.manufacturerWebsite)
+
+  // const isValidManufacturingDateEntry =
   console.log(carEntries)
   const dispatch = useDispatch<AppDispatch>()
   return (
