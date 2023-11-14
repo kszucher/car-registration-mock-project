@@ -5,6 +5,7 @@ import {Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-ico
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
+import {formatDate} from "../utils/Utils.ts"
 
 function CarRegistration() {
   const carEntries = useSelector((state: RootState) => state.carEntries)
@@ -49,7 +50,7 @@ function CarRegistration() {
                   <Table.Cell>{el.engineCapacity}</Table.Cell>
                   <Table.Cell>{el.color}</Table.Cell>
                   <Table.Cell>{el.configuration}</Table.Cell>
-                  <Table.Cell>{el.manufacturingDate.toString()}</Table.Cell>
+                  <Table.Cell>{formatDate(el.manufacturingDate)}</Table.Cell>
                   <Table.Cell>
                     <Link onClick={() => window.open(el.manufacturerWebsite?.toString())}>{el.manufacturerWebsite?.toString() || ''}
                     </Link>
