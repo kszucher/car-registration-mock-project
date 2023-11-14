@@ -6,7 +6,6 @@ import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
 import {epochToYMD, isValidDate, isValidUrl, ymdToEpoch} from "../utils/Utils.ts"
-import {ValidatedCar} from "../state/CarStateTypes.ts";
 
 function CarRegistration() {
   const carEntries = useSelector((state: RootState) => state.carEntries)
@@ -166,15 +165,23 @@ function CarRegistration() {
                         newCarManufacturingDate.length > 0 && !isValidDate(newCarManufacturingDate) ||
                         newCarManufacturerWebsite !== undefined && newCarManufacturerWebsite.length > 0 && !isValidUrl(newCarManufacturerWebsite)
                       }
-                      onClick={() => dispatch(actions.pushCar({
-                        brand: newCarBrand,
-                        model: newCarModel,
-                        engineCapacity: newCarEngineCapacity,
-                        color: newCarColor || '',
-                        configuration: newCarConfiguration || '',
-                        manufacturingDate: ymdToEpoch(newCarManufacturingDate),
-                        manufacturerWebsite: newCarManufacturerWebsite || ''
-                      } as ValidatedCar))}>
+                      onClick={() => {
+                        const newCar = {
+                          brand: newCarBrand,
+                          model: newCarModel,
+                          engineCapacity: newCarEngineCapacity,
+                          color: newCarColor || '',
+                          configuration: newCarConfiguration || '',
+                          manufacturingDate: ymdToEpoch(newCarManufacturingDate),
+                          manufacturerWebsite: newCarManufacturerWebsite || ''
+                        }
+                        if (carEntries.find(el => JSON.stringify(el) === JSON.stringify(newCar))) {
+                          window.alert('This car has already been saved!')
+                        } else {
+                          dispatch(actions.pushCar(newCar))
+                        }
+                      }}
+                    >
                       {'Save'}
                     </Button>
                   </Popover.Close>
