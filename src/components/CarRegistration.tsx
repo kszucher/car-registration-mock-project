@@ -1,11 +1,11 @@
 import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid, Link,} from '@radix-ui/themes'
 import './CarRegistration.css'
 import '@radix-ui/themes/styles.css'
-import {ExclamationTriangleIcon, Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
+import {CheckIcon, ExclamationTriangleIcon, Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
-import {formatDate} from "../utils/Utils.ts"
+import {formatDate, isValidDate, isValidUrl} from "../utils/Utils.ts"
 
 function CarRegistration() {
   const carEntries = useSelector((state: RootState) => state.carEntries)
@@ -17,9 +17,6 @@ function CarRegistration() {
   const newCarEngineConfiguration = useSelector((state: RootState) => state.newCar.configuration)
   const newCarManufacturingDate = useSelector((state: RootState) => state.newCar.manufacturingDate)
   const newCarManufacturerWebsite = useSelector((state: RootState) => state.newCar.manufacturerWebsite)
-
-  // const isValidManufacturingDateEntry =
-  console.log(carEntries)
   const dispatch = useDispatch<AppDispatch>()
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: 400, height: 300}}>
@@ -133,9 +130,14 @@ function CarRegistration() {
                       value={newCarManufacturingDate}
                       onChange={(e) => dispatch(actions.setSelectedManufacturingDate(e.target.value))}/>
                     <TextField.Slot>
-                      <ExclamationTriangleIcon height="14" width="14"/>
+                      {newCarManufacturingDate.length > 0 && !isValidDate(newCarManufacturingDate) &&
+                        <ExclamationTriangleIcon color={'orange'} height="14" width="14"/>}
+                      {newCarManufacturingDate.length > 0 && isValidDate(newCarManufacturingDate) &&
+                        <CheckIcon color={'green'} height="14" width="14"/>}
                     </TextField.Slot>
                   </TextField.Root>
+                </Grid>
+                <Grid columns="1" gap="3" mt="4" width="auto" align="center">
                   <Text as="div" size="2" weight="bold">{'Manufacturer Website'}</Text>
                   <TextField.Root>
                     <TextField.Input
@@ -143,7 +145,10 @@ function CarRegistration() {
                       value={newCarManufacturerWebsite}
                       onChange={(e) => dispatch(actions.setSelectedManufacturerWebsite(e.target.value))}/>
                     <TextField.Slot>
-                      <ExclamationTriangleIcon height="14" width="14"/>
+                      {newCarManufacturerWebsite && newCarManufacturerWebsite.length > 0 && !isValidUrl(newCarManufacturerWebsite) &&
+                        <ExclamationTriangleIcon color={'orange'} height="14" width="14"/>}
+                      {newCarManufacturerWebsite && newCarManufacturerWebsite.length > 0 && isValidUrl(newCarManufacturerWebsite) &&
+                        <CheckIcon color={'green'} height="14" width="14"/>}
                     </TextField.Slot>
                   </TextField.Root>
                 </Grid>
@@ -153,7 +158,14 @@ function CarRegistration() {
                     Reset
                   </Button>
                   <Popover.Close>
-                    <Button variant="soft" onClick={() => console.log(newCar)}>
+                    <Button
+                      variant="soft"
+                      disabled={
+                        newCarManufacturingDate.length === 0 ||
+                        newCarManufacturingDate.length > 0 && !isValidDate(newCarManufacturingDate) ||
+                        newCarManufacturerWebsite !== undefined && newCarManufacturerWebsite.length > 0 && !isValidUrl(newCarManufacturerWebsite)
+                      }
+                      onClick={() => console.log(newCar)}>
                       {'Save'}
                     </Button>
                   </Popover.Close>
