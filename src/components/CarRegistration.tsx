@@ -52,7 +52,7 @@ function CarRegistration() {
                   <Table.Cell>{el.configuration}</Table.Cell>
                   <Table.Cell>{formatDate(el.manufacturingDate)}</Table.Cell>
                   <Table.Cell>
-                    <Link onClick={() => window.open(el.manufacturerWebsite?.toString())}>{el.manufacturerWebsite?.toString() || ''}
+                    <Link onClick={() => window.open(el.manufacturerWebsite?.toString())}>{el.manufacturerWebsite?.toString()}
                     </Link>
                   </Table.Cell>
                 </Table.Row>
@@ -75,7 +75,7 @@ function CarRegistration() {
                   {'Add New Entry'}
                 </Button>
               </Popover.Trigger>
-              <Popover.Content style={{ width: 360 }}>
+              <Popover.Content style={{ width: 420 }}>
                 <Grid columns="2" gap="3" width="auto" align="center">
                   <Text as="div" size="2" weight="bold" style={{}}>{'Brand'}</Text>
                   <Select.Root value={newCarBrand} onValueChange={(value) => dispatch(actions.setSelectedBrand(value))}>
@@ -123,9 +123,9 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Manufacturing Date'}</Text>
-                  <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email"/>
+                  <TextField.Input defaultValue="" placeholder="YYYY-MM-DD"/>
                   <Text as="div" size="2" weight="bold">{'Manufacturer Website'}</Text>
-                  <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email"/>
+                  <TextField.Input defaultValue="" placeholder="https://www.example.com/"/>
                 </Grid>
                 <Flex gap="3" mt="4" justify="end">
                   <Button variant="soft" color="cyan">
