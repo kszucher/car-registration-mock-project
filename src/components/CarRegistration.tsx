@@ -9,7 +9,6 @@ import {epochToYMD, isValidDate, isValidUrl, ymdToEpoch} from "../utils/Utils.ts
 
 function CarRegistration() {
   const carEntries = useSelector((state: RootState) => state.carEntries)
-  // const newCar = useSelector((state: RootState) => state.newCar)
   const newCarBrand = useSelector((state: RootState) => state.newCar.brand)
   const newCarModel = useSelector((state: RootState) => state.newCar.model)
   const newCarEngineCapacity = useSelector((state: RootState) => state.newCar.engineCapacity)
