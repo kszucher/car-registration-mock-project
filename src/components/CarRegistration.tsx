@@ -1,7 +1,7 @@
 import {Button, Dialog, Flex, TextField, Text, Table, TableBody, Popover, Select, Grid, Link,} from '@radix-ui/themes'
 import './CarRegistration.css'
 import '@radix-ui/themes/styles.css'
-import {CheckIcon, ExclamationTriangleIcon, Pencil1Icon, ResetIcon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
+import {CheckIcon, ExclamationTriangleIcon, Pencil1Icon, TrashIcon, UploadIcon} from "@radix-ui/react-icons"
 import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {useDispatch, useSelector} from "react-redux"
 import {actions, AppDispatch, RootState} from "../reducers/CarReducer.ts"
@@ -152,10 +152,6 @@ function CarRegistration() {
                   </TextField.Root>
                 </Grid>
                 <Flex gap="3" mt="4" justify="end">
-                  <Button variant="soft" color="cyan">
-                    <ResetIcon width="16" height="16" />
-                    Reset
-                  </Button>
                   <Popover.Close>
                     <Button
                       variant="soft"
