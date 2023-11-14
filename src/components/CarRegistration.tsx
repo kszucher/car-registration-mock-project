@@ -79,7 +79,7 @@ function CarRegistration() {
               <Popover.Content style={{ width: 420 }}>
                 <Grid columns="2" gap="3" width="auto" align="center">
                   <Text as="div" size="2" weight="bold" style={{}}>{'Brand'}</Text>
-                  <Select.Root value={newCarBrand} onValueChange={(value) => dispatch(actions.setSelectedBrand(value))}>
+                  <Select.Root value={newCarBrand} onValueChange={(value) => dispatch(actions.setBrand(value))}>
                     <Select.Trigger />
                     <Select.Content>
                       {Object.keys(mockCarDefinitions.brands).map((el, index) => (
@@ -88,7 +88,7 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Model'}</Text>
-                  <Select.Root value={newCarModel} onValueChange={(value) => dispatch(actions.setSelectedModel(value))}>
+                  <Select.Root value={newCarModel} onValueChange={(value) => dispatch(actions.setModel(value))}>
                     <Select.Trigger />
                     <Select.Content>
                       {Object.keys(mockCarDefinitions.brands[newCarBrand].models).map((el, index) => (
@@ -97,7 +97,7 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Engine Capacity'}</Text>
-                  <Select.Root value={newCarEngineCapacity.toString()} onValueChange={(value) => dispatch(actions.setSelectedEngineCapacity(parseInt(value)))}>
+                  <Select.Root value={newCarEngineCapacity.toString()} onValueChange={(value) => dispatch(actions.setEngineCapacity(parseInt(value)))}>
                     <Select.Trigger />
                     <Select.Content>
                       {mockCarDefinitions.brands[newCarBrand].models[newCarModel].engineCapacities.map((el, index) => (
@@ -106,7 +106,7 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Color'}</Text>
-                  <Select.Root value={newCarColor} onValueChange={(value) => dispatch(actions.setSelectedColor(value))}>
+                  <Select.Root value={newCarColor} onValueChange={(value) => dispatch(actions.setColor(value))}>
                     <Select.Trigger />
                     <Select.Content>
                       {mockCarDefinitions.brands[newCarBrand].models[newCarModel].colors.map((el, index) => (
@@ -115,7 +115,7 @@ function CarRegistration() {
                     </Select.Content>
                   </Select.Root>
                   <Text as="div" size="2" weight="bold">{'Configuration'}</Text>
-                  <Select.Root value={newCarConfiguration} onValueChange={(value) => dispatch(actions.setSelectedConfiguration(value))}>
+                  <Select.Root value={newCarConfiguration} onValueChange={(value) => dispatch(actions.setConfiguration(value))}>
                     <Select.Trigger />
                     <Select.Content>
                       {mockCarDefinitions.brands[newCarBrand].models[newCarModel].configurations.map((el, index) => (
@@ -128,7 +128,7 @@ function CarRegistration() {
                     <TextField.Input
                       placeholder="YYYY-MM-DD"
                       value={newCarManufacturingDate}
-                      onChange={(e) => dispatch(actions.setSelectedManufacturingDate(e.target.value))}/>
+                      onChange={(e) => dispatch(actions.setManufacturingDate(e.target.value))}/>
                     <TextField.Slot>
                       {newCarManufacturingDate.length > 0 && !isValidDate(newCarManufacturingDate) &&
                         <ExclamationTriangleIcon color={'orange'} height="14" width="14"/>}
@@ -143,7 +143,7 @@ function CarRegistration() {
                     <TextField.Input
                       placeholder='https://example.com/'
                       value={newCarManufacturerWebsite}
-                      onChange={(e) => dispatch(actions.setSelectedManufacturerWebsite(e.target.value))}/>
+                      onChange={(e) => dispatch(actions.setManufacturerWebsite(e.target.value))}/>
                     <TextField.Slot>
                       {newCarManufacturerWebsite && newCarManufacturerWebsite.length > 0 && !isValidUrl(newCarManufacturerWebsite) &&
                         <ExclamationTriangleIcon color={'orange'} height="14" width="14"/>}

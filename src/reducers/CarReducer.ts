@@ -4,20 +4,17 @@ import {mockCarDefinitions} from "../mock/MockCarDefinitions.ts"
 import {mockCarEntries} from "../mock/MockCarEntries.ts"
 import {ValidatedCar} from "../state/CarStateTypes.ts"
 
-const carStateDefault = JSON.stringify(carState)
-
 export const carSlice = createSlice({
   name: 'carSlice',
   initialState: carState,
   reducers: {
-    resetData: () => JSON.parse(carStateDefault),
     loadSampleData(state){
       Object.assign(state.carEntries, mockCarEntries)
     },
     deleteData: (state) => {
       state.carEntries = []
     },
-    setSelectedBrand(state, action: PayloadAction<string>){
+    setBrand(state, action: PayloadAction<string>){
       const brand = action.payload
       const model = Object.keys(mockCarDefinitions.brands[brand].models)[0]
       const engineCapacity = mockCarDefinitions.brands[brand].models[model].engineCapacities[0]
@@ -25,7 +22,7 @@ export const carSlice = createSlice({
       const configuration = mockCarDefinitions.brands[brand].models[model].configurations[0]
       Object.assign(state.newCar, {brand, model, engineCapacity, color, configuration})
     },
-    setSelectedModel(state, action: PayloadAction<string>) {
+    setModel(state, action: PayloadAction<string>) {
       const brand = state.newCar.brand
       const model = action.payload
       const engineCapacity = mockCarDefinitions.brands[brand].models[model].engineCapacities[0]
@@ -33,21 +30,22 @@ export const carSlice = createSlice({
       const configuration = mockCarDefinitions.brands[brand].models[model].configurations[0]
       Object.assign(state.newCar, {model, engineCapacity, color, configuration})
     },
-    setSelectedEngineCapacity(state, action: PayloadAction<number>) {
+    setEngineCapacity(state, action: PayloadAction<number>) {
       state.newCar.engineCapacity = action.payload
     },
-    setSelectedColor(state, action: PayloadAction<string>) {
+    setColor(state, action: PayloadAction<string>) {
       state.newCar.color = action.payload
     },
-    setSelectedConfiguration(state, action: PayloadAction<string>) {
+    setConfiguration(state, action: PayloadAction<string>) {
       state.newCar.configuration = action.payload
     },
-    setSelectedManufacturingDate(state, action: PayloadAction<string>) {
+    setManufacturingDate(state, action: PayloadAction<string>) {
       state.newCar.manufacturingDate = action.payload
     },
-    setSelectedManufacturerWebsite(state, action: PayloadAction<string>) {
+    setManufacturerWebsite(state, action: PayloadAction<string>) {
       state.newCar.manufacturerWebsite = action.payload
     },
+
     pushCar(state, action: PayloadAction<ValidatedCar>) {
       Object.assign(state.carEntries, [...state.carEntries, action.payload])
     }
